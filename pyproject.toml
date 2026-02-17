@@ -1,0 +1,15 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "x"
+version = "1.0"
+authors = [
+    { name = "naren magar", email = "narenmagarz98@gmail.com" }
+]
+description = "A prompt-driven command execution system that interprets natural language instructions and translates them into executable Linux commands."
+
+[project.scripts]
+x = "x.main:main"
+
