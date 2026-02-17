@@ -1,12 +1,5 @@
-Metadata-Version: 2.1
+Metadata-Version: 2.4
 Name: x
 Version: 1.0
-Summary: prompt based cli
-Home-page: UNKNOWN
-Author: naren magar
-License: UNKNOWN
-Platform: UNKNOWN
-Requires-Python: >=3.6
-
-UNKNOWN
-
+Summary: A prompt-driven command execution system that interprets natural language instructions and translates them into executable Linux commands.
+Author-email: naren magar <narenmagarz98@gmail.com>
