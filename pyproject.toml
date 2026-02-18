@@ -12,4 +12,3 @@ description = "A prompt-driven command execution system that interprets natural 
 
 [project.scripts]
 x = "x.main:main"
-
