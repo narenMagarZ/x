@@ -23,6 +23,7 @@ def main() -> None:
     args = parser.parse_args()
     prompt = args.prompt
     try:
+        # TODO: verify if command is safe to use
         prefix = '''Return a single valid bash command that accomplishes the task.
             Do not include explanations, comments, markdown, backticks, or additional text.
             Output only the raw command.
