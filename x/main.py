@@ -11,6 +11,9 @@ api_key = os.getenv("OPEN_ROUTER_API_KEY")
 gpt_model = os.getenv("GPT_MODEL")
 role = os.getenv("ROLE")
 
+if api_key is None or gpt_model is None or role is None:
+    print("Please set the OPEN_ROUTER_API_KEY, GPT_MODEL, and ROLE environment variables.")
+    exit(1)
 
 def main() -> None:
 
@@ -35,6 +38,7 @@ def main() -> None:
             }))
         command = response.json()["choices"][0]["message"]["content"]
         subprocess.run(command, shell=True)
+        # TODO: log prompt along with command and timestamp
     except Exception as e:
         print(e)
 
