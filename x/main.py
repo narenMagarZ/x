@@ -8,6 +8,8 @@ import json
 load_dotenv()
 
 api_key = os.getenv("OPEN_ROUTER_API_KEY")
+gpt_model = os.getenv("GPT_MODEL")
+role = os.getenv("ROLE")
 
 
 def main() -> None:
@@ -28,8 +30,8 @@ def main() -> None:
                 "Authorization": f"Bearer {api_key}",
             },
             data=json.dumps({
-                "model": "gpt-3.5-turbo",
-                "messages": [{"role": "user", "content": f"{prefix} {prompt}"}],
+                "model": gpt_model,
+                "messages": [{"role": role, "content": f"{prefix} {prompt}"}],
             }))
         command = response.json()["choices"][0]["message"]["content"]
         subprocess.run(command, shell=True)
