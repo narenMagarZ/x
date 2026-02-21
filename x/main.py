@@ -4,8 +4,11 @@ import os
 from dotenv import load_dotenv
 import requests
 import json
+from pathlib import Path
+from datetime import datetime
 
 load_dotenv()
+
 
 api_key = os.getenv("OPEN_ROUTER_API_KEY")
 gpt_model = os.getenv("GPT_MODEL")
@@ -14,6 +17,17 @@ role = os.getenv("ROLE")
 if api_key is None or gpt_model is None or role is None:
     print("Please set the OPEN_ROUTER_API_KEY, GPT_MODEL, and ROLE environment variables.")
     exit(1)
+
+
+def write_log(command: str, prompt: str) -> None:
+    try:
+        home_path = Path.home() 
+        x_log_path = f"{home_path}/.local/state/x"   
+        os.makedirs(x_log_path, exist_ok=True)
+        with open(f"{x_log_path}/x.log", "a") as file:
+            file.write(f"[INFO {datetime.now()}] [COMMAND] {command} [PROMPT] {prompt}\n")
+    except Exception as e:
+        print("Failed to log command prompt")
 
 def main() -> None:
 
@@ -38,8 +52,11 @@ def main() -> None:
                 "messages": [{"role": role, "content": f"{prefix} {prompt}"}],
             }))
         command = response.json()["choices"][0]["message"]["content"]
+
+        write_log(command, prompt)
+
         subprocess.run(command, shell=True)
-        # TODO: log prompt along with command and timestamp
+        
     except Exception as e:
         print(e)
 
