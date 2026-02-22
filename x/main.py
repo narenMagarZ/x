@@ -10,6 +10,7 @@ from datetime import datetime
 load_dotenv()
 
 
+# TODO: configs would be stored in config file as config.json
 api_key = os.getenv("OPEN_ROUTER_API_KEY")
 gpt_model = os.getenv("GPT_MODEL")
 role = os.getenv("ROLE")
@@ -38,6 +39,9 @@ def main() -> None:
     prompt = args.prompt
     try:
         # TODO: verify if command is safe to use
+        # TODO: cache prompt
+        # creating connection on each prompt request would not be good idea, so we will create a daemon which is responsible to maintain redis
+        # connection up
         prefix = '''Return a single valid bash command that accomplishes the task.
             Do not include explanations, comments, markdown, backticks, or additional text.
             Output only the raw command.
